@@ -32,30 +32,19 @@ class ViewController: UIViewController {
     
     // gives us a method to spin our image view when we "roll" the dice
     func spinImageView(imageView: UIImageView, rotateLeft: Bool = true) {
-        let shakeAmountX: CGFloat = 25
-        let imageViewCenterX: CGFloat = imageView.center.x
-        var rotationAmount: CGFloat = 3
+        var radians: CGFloat = .pi / 3
         
         if (rotateLeft == false) {
-            rotationAmount = rotationAmount * -1
+            radians = radians * -1
         }
         
-        UIView.animate(withDuration: 1.0, animations: {
-            imageView.center.x = imageView.center.x + (shakeAmountX * -1)
-            imageView.transform = imageView.transform.rotated(by: .pi/rotationAmount)
-            imageView.center.x = imageView.center.x + shakeAmountX
-            imageView.transform = imageView.transform.rotated(by: .pi/rotationAmount)
-            imageView.center.x = imageView.center.x + shakeAmountX
-            imageView.transform = imageView.transform.rotated(by: .pi/rotationAmount)
-            imageView.center.x = imageView.center.x + (shakeAmountX * -1)
-            
-            imageView.transform = imageView.transform.rotated(by: .pi/rotationAmount)
-            imageView.center.x = imageView.center.x + shakeAmountX
-            imageView.transform = imageView.transform.rotated(by: .pi/rotationAmount)
-            imageView.transform = imageView.transform.rotated(by: .pi/rotationAmount)
-            imageView.center.x = imageView.center.x + (shakeAmountX * -1)
-            
-            imageView.center.x = imageViewCenterX
+        UIView.animate(withDuration: 1.0,
+                       delay: 0.0,
+                       options: [.curveLinear ], animations: {
+            for _ in 1...13 {
+                // spin the dice
+                imageView.transform = imageView.transform.rotated(by: radians)
+            }
         }, completion: setDiceValues)
     }
     
