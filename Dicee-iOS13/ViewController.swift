@@ -34,6 +34,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func rollButtonPressed(_ sender: UIButton) {
+        spinImageView(imageView: diceImageView1, rotateLeft: false)
+        spinImageView(imageView: diceImageView2, rotateLeft: true)
+        
         diceImageView1.image = dice[leftDiceNumber]
         diceImageView2.image = dice[rightDiceNumber]
         
@@ -44,6 +47,25 @@ class ViewController: UIViewController {
             leftDiceNumber = 5
             rightDiceNumber = 5
         }
+    }
+    
+    // gives us a method to spin our image view when we "roll" the dice
+    func spinImageView(imageView: UIImageView, rotateLeft: Bool = true) {
+        var rotationAmount: CGFloat = 3
+        
+        if (rotateLeft == false) {
+            rotationAmount = rotationAmount * -1
+        }
+        
+        UIView.animate(withDuration: 1.0, animations: {
+            imageView.transform = imageView.transform.rotated(by: .pi/rotationAmount)
+            imageView.transform = imageView.transform.rotated(by: .pi/rotationAmount)
+            imageView.transform = imageView.transform.rotated(by: .pi/rotationAmount)
+            
+            imageView.transform = imageView.transform.rotated(by: .pi/rotationAmount)
+            imageView.transform = imageView.transform.rotated(by: .pi/rotationAmount)
+            imageView.transform = imageView.transform.rotated(by: .pi/rotationAmount)
+        })
     }
 }
 
